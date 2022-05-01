@@ -11,17 +11,17 @@ public class ControllerCalculator {
 
     private final ServiceCalculator serviceCalculator;
 
-    public ControllerCalculator (ServiceCalculator serviceCalculator) {
+    public ControllerCalculator(ServiceCalculator serviceCalculator) {
         this.serviceCalculator = serviceCalculator;
     }
 
     @GetMapping
-    public String hello(){
+    public String hello() {
         return "<b>Привет!</b>";
     }
 
     @GetMapping(path = "/calculator")
-    public String answerHello(){
+    public String answerHello() {
         return "<b>Добро пожаловать в калькулятор!</b>";
     }
 
@@ -32,7 +32,7 @@ public class ControllerCalculator {
     }
 
     @GetMapping("/minus")
-    public String numMinus(@RequestParam int num1, @RequestParam int num2){
+    public String numMinus(@RequestParam int num1, @RequestParam int num2) {
         int result = serviceCalculator.minus(num1, num2);
         return massageInBrowser(num1, num2, '-', result);
     }
@@ -45,14 +45,14 @@ public class ControllerCalculator {
 
     @GetMapping("/divide")
     public String numdivide(@RequestParam int num1, @RequestParam int num2) {
-        if(num2 == 0){
-            System.out.println("Второе чило 0, на ноль делить дельзя!");
+        if (num2 == 0) {
+            throw new DivideZeroException("На ноль делить нельзя!");
         }
         int result = serviceCalculator.divide(num1, num2);
         return massageInBrowser(num1, num2, '/', result);
     }
 
-    private String massageInBrowser (int num1, int num2,char action, int result) {
+    private String massageInBrowser(int num1, int num2, char action, int result) {
         return String.format("<h1>%d %c %d = %d</h1>", num1, action, num2, result);
     }
 }
