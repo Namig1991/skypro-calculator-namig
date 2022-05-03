@@ -45,9 +45,6 @@ public class ControllerCalculator {
 
     @GetMapping("/divide")
     public String numdivide(@RequestParam int num1, @RequestParam int num2) {
-        if (num2 == 0) {
-            throw new DivideZeroException("На ноль делить нельзя!");
-        }
         int result = serviceCalculator.divide(num1, num2);
         return massageInBrowser(num1, num2, '/', result);
     }

@@ -7,6 +7,6 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 public class DivideZeroException extends IllegalArgumentException {
 
     public DivideZeroException(String name){
-        super("На ноль делить нельзя!" + name);
+        super("На ноль делить нельзя!");
     }
 }
