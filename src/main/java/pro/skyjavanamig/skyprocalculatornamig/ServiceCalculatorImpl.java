@@ -21,7 +21,10 @@ public class ServiceCalculatorImpl implements ServiceCalculator {
     }
 
     @Override
-    public int divide(int num1, int num2){
+    public int divide(int num1, int num2) {
+        if(num2 == 0){
+            throw new DivideZeroException("Делить на ноль нельзя!");
+        }
         return num1 / num2;
     }
 }
