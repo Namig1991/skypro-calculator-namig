@@ -14,43 +14,60 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 public class CalculatorServiceImplParameterTest {
 
     private final ServiceCalculatorImpl out = new ServiceCalculatorImpl();
-    public static Stream<Arguments> paramsForTests(){
+    private static Stream<Arguments> paramsForTestsSum(){
         return Stream.of(
-                Arguments.of(1, 2, 2),
-                Arguments.of(2, 1, 2),
-                Arguments.of(4, 2, 2),
-                Arguments.of(3, 1, 3),
-                Arguments.of(0, 1, 0),
-                Arguments.of(3, 1, 4)
-
+                Arguments.of(5, 2, 7),
+                Arguments.of(3, 1, 4),
+                Arguments.of(4, 2, 6)
         );
     }
 
     @ParameterizedTest
-    @MethodSource("paramsForTests")
-    public void shouldReturnCorrectResultFromSummation(int num1, int num2){
-        assertEquals(num1 + num2, out.sum(num1,num2));
-        Arguments.of(1, 1 , 2);
+    @MethodSource("paramsForTestsSum")
+    public void shouldReturnCorrectResultFromSummation(int num1, int num2, int expected){
+        assertEquals(expected, out.sum(num1,num2));
+    }
+
+    private static Stream<Arguments> paramsForTestsMinus(){
+        return Stream.of(
+                Arguments.of(10, 5, 5),
+                Arguments.of(7, 5, 2),
+                Arguments.of(8, 6, 2)
+        );
     }
 
     @ParameterizedTest
-    @MethodSource("paramsForTests")
-    public void shouldReturnCorrectResultFromMinus(int num1, int num2){
-        assertEquals(num1 - num2, out.minus(num1,num2));
-        Arguments.of(1, 1 , 0);
+    @MethodSource("paramsForTestsMinus")
+    public void shouldReturnCorrectResultFromMinus(int num1, int num2, int expected){
+        assertEquals(expected, out.minus(num1,num2));
+    }
+
+    private static Stream<Arguments> paramsForTestsMultiply(){
+        return Stream.of(
+                Arguments.of(4, 2, 8),
+                Arguments.of(6, 2, 12),
+                Arguments.of(4, 4, 16)
+        );
     }
 
     @ParameterizedTest
-    @MethodSource("paramsForTests")
-    public void shouldReturnCorrectResultFromMultiply(int num1, int num2){
-        assertEquals(num1 * num2, out.multiply(num1,num2));
-        Arguments.of(1, 1 , 1);
+    @MethodSource("paramsForTestsMultiply")
+    public void shouldReturnCorrectResultFromMultiply(int num1, int num2, int expected){
+        assertEquals(expected, out.multiply(num1,num2));
+    }
+
+    private static Stream<Arguments> paramsForTestsDividing(){
+        return Stream.of(
+                Arguments.of(8, 2, 4),
+                Arguments.of(12, 6, 2),
+                Arguments.of(6, 2, 3)
+        );
     }
 
     @ParameterizedTest
-    @MethodSource("paramsForTests")
-    public void shouldReturnCorrectResultFromDividing(int num1, int num2){
+    @MethodSource("paramsForTestsDividing")
+    public void shouldReturnCorrectResultFromDividing(int num1, int num2, int expected){
         assertThrows(DivideZeroException.class, () -> out.divide(1, 0) );
-        assertEquals(num1 / num2, out.divide(num1,num2));
+        assertEquals(expected, out.divide(num1,num2));
     }
 }

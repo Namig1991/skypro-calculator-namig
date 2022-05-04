@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 @ResponseStatus (HttpStatus.BAD_REQUEST)
 public class DivideZeroException extends IllegalArgumentException {
 
-    public DivideZeroException(String name){
-        super("На ноль делить нельзя!");
+    public DivideZeroException(String s) {
+        super(s);
     }
 }
